@@ -1,0 +1,3 @@
+code,tax_rate,tax_customer_class,tax_product_class,priority,calculate_subtotal,position
+7% MwSt,7% MwSt,3,7% MwSt,0,,0
+19% MwSt,19% MwSt,3,19% MwSt,0,,0
