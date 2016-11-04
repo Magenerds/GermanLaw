@@ -1,15 +1,10 @@
 <?php
 /**
- * Magenerds\GermanLaw\Block\AfterPrice
+ * NOTICE OF LICENSE
  *
- * Copyright (c) 2016 TechDivision GmbH
- * All rights reserved
- *
- * This product includes proprietary software developed at TechDivision GmbH, Germany
- * For more information see http://www.techdivision.com/
- *
- * To obtain a valid license for using this software please contact us at
- * license@techdivision.com
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
  */
 
 /**
@@ -21,8 +16,6 @@
  * @author     Bernhard Wick <b.wick@techdivision.com>
  */
 namespace Magenerds\GermanLaw\Model\Plugin;
-
-use Magento\Framework\View\Layout;
 
 /**
  * Class AfterPriceTest
