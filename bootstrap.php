@@ -1,6 +1,7 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
+ * bootstrap.php
+ *
  * Copyright (c) 2016 TechDivision GmbH
  * All rights reserved
  *
@@ -14,12 +15,10 @@
 /**
  * @category   Magenerds
  * @package    Magenerds_GermanLaw
- * @subpackage etc
- * @author     Florian Sydekum <f.sydekum@techdivision.com>
+ * @subpackage Test
  * @copyright  Copyright (c) 2016 TechDivision GmbH (http://www.techdivision.com)
  * @link       http://www.techdivision.com/
+ * @author     Bernhard Wick <b.wick@techdivision.com>
  */
- -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
-    <module name="Magenerds_GermanLaw" setup_version="1.0.0" />
-</config>
+
+require_once __DIR__ . '/vendor/autoload.php';

@@ -5,8 +5,20 @@
     "php": "~5.5.0|~5.6.0|~7.0.0",
     "magento/framework": "100.1.*"
   },
+  "repositories": {
+    "magento": {
+      "type": "composer",
+      "url": "https://repo.magento.com/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.1.0",
+    "magento/module-store": "^100.1",
+    "magento/module-catalog": "^101.0",
+    "magento/module-tax": "^100.1"
+  },
   "type": "magento2-module",
-  "version": "${release.version}",
+  "version": "1.0.0",
   "license": "proprietary",
   "autoload": {
     "files": [

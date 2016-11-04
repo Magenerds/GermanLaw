@@ -17,7 +17,6 @@
  * @package    Magenerds_GermanLaw
  * @subpackage Block
  * @copyright  Copyright (c) 2016 TechDivision GmbH (http://www.techdivision.com)
- * @version    ${release.version}
  * @link       http://www.techdivision.com/
  * @author     Florian Sydekum <f.sydekum@techdivision.com>
  */
@@ -60,7 +59,7 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
     protected $_urlBuilder;
 
     /**
-     * @param \Magento\Framework\View\Element\Template $context
+     * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Tax\Api\TaxCalculationInterface $taxCalculation
      * @param \Magento\Customer\Model\Session $session

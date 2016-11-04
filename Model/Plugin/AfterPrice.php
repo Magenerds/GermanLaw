@@ -17,7 +17,6 @@
  * @package    Magenerds_GermanLaw
  * @subpackage Model
  * @copyright  Copyright (c) 2016 TechDivision GmbH (http://www.techdivision.com)
- * @version    ${release.version}
  * @link       http://www.techdivision.com/
  * @author     Florian Sydekum <f.sydekum@techdivision.com>
  */
