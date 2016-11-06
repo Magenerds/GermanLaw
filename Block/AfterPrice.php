@@ -114,7 +114,7 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
     {
         /** @var $product \Magento\Catalog\Model\Product */
         $product = $this->_registry->registry('product');
-        $taxText = __($this->_scopeConfig->getValue('germanlaw/price/tax_text'));
+        $taxText = __($this->_scopeConfig->getValue('germanlaw/price/tax_text', \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
 
         $taxRate = 0;
 
