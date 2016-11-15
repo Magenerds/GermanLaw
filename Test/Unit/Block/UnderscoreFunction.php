@@ -15,5 +15,14 @@
  * @link       http://www.techdivision.com/
  * @author     Bernhard Wick <b.wick@techdivision.com>
  */
+namespace Magenerds\GermanLaw\Block;
 
-require_once __DIR__ . '/vendor/autoload.php';
+/**
+ * Function to mock the Magento __() function for this namespace
+ *
+ * @param string $text The text to return
+ * @return string
+ */
+function __($text) {
+    return $text;
+}

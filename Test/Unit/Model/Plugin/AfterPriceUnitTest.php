@@ -15,13 +15,18 @@
  * @link       http://www.techdivision.com/
  * @author     Bernhard Wick <b.wick@techdivision.com>
  */
-namespace Magenerds\GermanLaw\Model\Plugin;
+namespace Magenerds\GermanLaw\Test\Unit\Model\Plugin;
+
+use Magenerds\GermanLaw\Model\Plugin\AfterPrice;
+use Magento\Framework\Pricing\Render;
+use Magento\Framework\View\Element\BlockInterface;
+use Magento\Framework\View\LayoutInterface;
 
 /**
- * Class AfterPriceTest
+ * Class AfterPriceUnitTest
  * @package Magenerds\GermanLaw\Test
  */
-class AfterPriceTest extends \PHPUnit_Framework_TestCase
+class AfterPriceUnitTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -38,7 +43,7 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $block = $this->getMock('\Magento\Framework\View\Element\BlockInterface', ['setTemplate', 'toHtml']);
+        $block = $this->getMock(BlockInterface::class, ['setTemplate', 'toHtml']);
         $block->expects($this->any())
             ->method('setTemplate')
             ->will($this->returnValue(null));
@@ -46,7 +51,7 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
             ->method('toHtml')
             ->will($this->returnValue('it worked'));
 
-        $layout = $this->getMock('\Magento\Framework\View\LayoutInterface');
+        $layout = $this->getMock(LayoutInterface::class);
         $layout->expects($this->once())
             ->method('createBlock')
             ->will($this->returnValue($block));
@@ -67,7 +72,7 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'it worked',
             $this->_testInstance->afterRender(
-            $this->getMock('\Magento\Framework\Pricing\Render', [], [], '', false),
+            $this->getMock(Render::class, [], [], '', false),
             ''
         ));
     }
@@ -80,13 +85,13 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
     public function testAfterRenderLazyLoading()
     {
         $this->_testInstance->afterRender(
-            $this->getMock('\Magento\Framework\Pricing\Render', [], [], '', false),
+            $this->getMock(Render::class, [], [], '', false),
             ''
         );
         $this->assertEquals(
             'it worked',
             $this->_testInstance->afterRender(
-                $this->getMock('\Magento\Framework\Pricing\Render', [], [], '', false),
+                $this->getMock(Render::class, [], [], '', false),
                 ''
             ));
     }
@@ -101,7 +106,7 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'I am sure it worked',
             $this->_testInstance->afterRender(
-                $this->getMock('\Magento\Framework\Pricing\Render', [], [], '', false),
+                $this->getMock(Render::class, [], [], '', false),
                 'I am sure '
             ));
     }

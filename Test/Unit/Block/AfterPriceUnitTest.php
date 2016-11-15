@@ -15,13 +15,25 @@
  * @link       http://www.techdivision.com/
  * @author     Bernhard Wick <b.wick@techdivision.com>
  */
-namespace Magenerds\GermanLaw\Block;
+namespace Magenerds\GermanLaw\Test\Unit\Block;
+
+use Magenerds\GermanLaw\Block\AfterPrice;
+use Magento\Catalog\Model\Product;
+use Magento\Customer\Model\Session;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Registry;
+use Magento\Framework\Url;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\Store\Model\StoreManager;
+use Magento\Tax\Api\TaxCalculationInterface;
+
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'UnderscoreFunction.php';
 
 /**
- * Class AfterPriceTest
+ * Class AfterPriceUnitTest
  * @package Magenerds\GermanLaw\Test
  */
-class AfterPriceTest extends \PHPUnit_Framework_TestCase
+class AfterPriceUnitTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -59,24 +71,24 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $storeManager = $this->getMock('\Magento\Store\Model\StoreManagerInterface');
+        $storeManager = $this->getMock(StoreManager::class, ['getStore'], [], '', false);
         $storeManager->expects($this->any())
             ->method('getStore')
             ->will($this->returnValue(null));
 
-        $session = $this->getMock('\Magento\Customer\Model\Session', [], [], '', false);
+        $session = $this->getMock(Session::class, ['getCustomerId'], [], '', false);
         $session->expects($this->any())
             ->method('getCustomerId')
             ->will($this->returnValue(123456));
 
-        $urlBuilder = $this->getMock('\Magento\Framework\UrlInterface', [], [], '', false);
+        $urlBuilder = $this->getMock(Url::class, ['getUrl'], [], '', false);
         $urlBuilder->expects($this->any())
             ->method('getUrl')
             ->will($this->returnValue('https://test-url.de'));
 
         // build up a mock context to transport the exposed scope config, store manager and session mock
-        $this->_scopeConfig = $this->getMock('\Magento\Framework\App\Config\ScopeConfigInterface');
-        $context = $this->getMock('\Magento\Framework\View\Element\Template\Context', [], [], '', false);
+        $this->_scopeConfig = $this->getMock(ScopeConfigInterface::class);
+        $context = $this->getMock(Context::class, ['getScopeConfig', 'getStoreManager', 'getSession', 'getUrlBuilder'], [], '', false);
         $context->expects($this->any())
             ->method('getScopeConfig')
             ->will($this->returnValue($this->_scopeConfig));
@@ -91,9 +103,9 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($urlBuilder));
 
         // build a mock registry and expose it over a class property
-        $this->_registry = $this->getMock('\Magento\Framework\Registry');
+        $this->_registry = $this->getMock(Registry::class);
 
-        $this->_calculation = $this->getMock('\Magento\Tax\Api\TaxCalculationInterface');
+        $this->_calculation = $this->getMock(TaxCalculationInterface::class);
 
         // instantiate the test class
         $this->_testInstance = new AfterPrice(
@@ -167,7 +179,7 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTaxTextWithProduct()
     {
-        $mockProduct = $this->getMock('\Magento\Catalog\Model\Product', array('getTaxClassId'), [], '', false);
+        $mockProduct = $this->getMock(Product::class, array('getTaxClassId'), [], '', false);
         $mockProduct->expects($this->once())
             ->method('getTaxClassId')
             ->will($this->returnValue(1));
@@ -212,7 +224,7 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTaxTextWithProductAndShippingPageLink()
     {
-        $mockProduct = $this->getMock('\Magento\Catalog\Model\Product', array('getTaxClassId'), [], '', false);
+        $mockProduct = $this->getMock(Product::class, array('getTaxClassId'), [], '', false);
         $mockProduct->expects($this->once())
             ->method('getTaxClassId')
             ->will($this->returnValue(1));
@@ -241,7 +253,7 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
     {
         $taxTestFromConfig = 'test tax test';
 
-        $mockProduct = $this->getMock('\Magento\Catalog\Model\Product', array('getTaxClassId'), [], '', false);
+        $mockProduct = $this->getMock(Product::class, array('getTaxClassId'), [], '', false);
         $mockProduct->expects($this->once())
             ->method('getTaxClassId')
             ->will($this->returnValue(1));
@@ -260,14 +272,4 @@ class AfterPriceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($taxTestFromConfig, $this->_testInstance->getTaxText());
     }
-}
-
-/**
- * Function to mock the Magento __() function for this namespace
- *
- * @param string $text The text to return
- * @return string
- */
-function __($text) {
-    return $text;
 }
