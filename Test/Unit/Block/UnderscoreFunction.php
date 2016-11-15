@@ -10,18 +10,19 @@
 /**
  * @category   Magenerds
  * @package    Magenerds_GermanLaw
- * @subpackage view
- * @author     Florian Sydekum <f.sydekum@techdivision.com>
+ * @subpackage Test
  * @copyright  Copyright (c) 2016 TechDivision GmbH (http://www.techdivision.com)
  * @link       http://www.techdivision.com/
+ * @author     Bernhard Wick <b.wick@techdivision.com>
  */
+namespace Magenerds\GermanLaw\Block;
 
 /**
- * @var $block \Magenerds\GermanLaw\Block\AfterPrice
+ * Function to mock the Magento __() function for this namespace
+ *
+ * @param string $text The text to return
+ * @return string
  */
-?>
-<?php if (!$block->isEnabled() || !$block->isAsterisk()) return; ?>
-
-<span class="tax-details">
-    * <?php echo $block->getTaxText() ?>
-</span>
+function __($text) {
+    return $text;
+}

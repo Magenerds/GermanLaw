@@ -1,15 +1,10 @@
 <?php
 /**
- * Magenerds\GermanLaw\Block\AfterPrice
+ * NOTICE OF LICENSE
  *
- * Copyright (c) 2016 TechDivision GmbH
- * All rights reserved
- *
- * This product includes proprietary software developed at TechDivision GmbH, Germany
- * For more information see http://www.techdivision.com/
- *
- * To obtain a valid license for using this software please contact us at
- * license@techdivision.com
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
  */
 
 /**
@@ -17,7 +12,6 @@
  * @package    Magenerds_GermanLaw
  * @subpackage Block
  * @copyright  Copyright (c) 2016 TechDivision GmbH (http://www.techdivision.com)
- * @version    ${release.version}
  * @link       http://www.techdivision.com/
  * @author     Florian Sydekum <f.sydekum@techdivision.com>
  */
@@ -60,7 +54,7 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
     protected $_urlBuilder;
 
     /**
-     * @param \Magento\Framework\View\Element\Template $context
+     * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Tax\Api\TaxCalculationInterface $taxCalculation
      * @param \Magento\Customer\Model\Session $session
