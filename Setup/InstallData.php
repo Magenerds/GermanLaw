@@ -50,31 +50,23 @@ class InstallData implements InstallDataInterface
     protected $_taxInstaller;
 
     /**
-     * @var \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface
-     */
-    protected $_repositoryInterface;
-
-    /**
      * Constructor.
      *
      * @param \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface
      * @param \Magento\Framework\Setup\SampleData\Executor $executor
      * @param \Magenerds\GermanLaw\Setup\CmsInstaller $cmsInstaller
      * @param \Magenerds\GermanLaw\Setup\TaxInstaller $taxInstaller
-     * @param \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface $repositoryInterface
      */
     public function __construct(
         \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface,
         \Magento\Framework\Setup\SampleData\Executor $executor,
         \Magenerds\GermanLaw\Setup\CmsInstaller $cmsInstaller,
-        \Magenerds\GermanLaw\Setup\TaxInstaller $taxInstaller,
-        \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface $repositoryInterface
+        \Magenerds\GermanLaw\Setup\TaxInstaller $taxInstaller
     ){
         $this->_configInterface = $configInterface;
         $this->_executor = $executor;
         $this->_cmsInstaller = $cmsInstaller;
         $this->_taxInstaller = $taxInstaller;
-        $this->repositoryInterface = $repositoryInterface;
     }
 
     /**
