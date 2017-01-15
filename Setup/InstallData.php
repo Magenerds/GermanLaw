@@ -21,6 +21,7 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
 
 /**
  * Class InstallData
@@ -49,23 +50,31 @@ class InstallData implements InstallDataInterface
     protected $_taxInstaller;
 
     /**
+     * @var \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface
+     */
+    protected $_repositoryInterface;
+
+    /**
      * Constructor.
      *
      * @param \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface
      * @param \Magento\Framework\Setup\SampleData\Executor $executor
      * @param \Magenerds\GermanLaw\Setup\CmsInstaller $cmsInstaller
      * @param \Magenerds\GermanLaw\Setup\TaxInstaller $taxInstaller
+     * @param \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface $repositoryInterface
      */
     public function __construct(
         \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface,
         \Magento\Framework\Setup\SampleData\Executor $executor,
         \Magenerds\GermanLaw\Setup\CmsInstaller $cmsInstaller,
-        \Magenerds\GermanLaw\Setup\TaxInstaller $taxInstaller
+        \Magenerds\GermanLaw\Setup\TaxInstaller $taxInstaller,
+        \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface $repositoryInterface
     ){
         $this->_configInterface = $configInterface;
         $this->_executor = $executor;
         $this->_cmsInstaller = $cmsInstaller;
         $this->_taxInstaller = $taxInstaller;
+        $this->repositoryInterface = $repositoryInterface;
     }
 
     /**
