@@ -98,7 +98,6 @@ class UpgradeData implements UpgradeDataInterface
         }
 
         if (version_compare($context->getVersion(), '1.0.4') < 0) {
-            
             // Enable Cookie Restriction Mode
             $this->configInterface->saveConfig('web/cookie/cookie_restriction', 1, ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
         }
