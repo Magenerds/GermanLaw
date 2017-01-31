@@ -50,6 +50,11 @@ class UpgradeData implements UpgradeDataInterface
     private $executor;
 
     /**
+     * @var \Magento\Framework\App\Config\ConfigResource\ConfigInterface
+     */
+    protected $configInterface;
+
+    /**
      * Constructor.
      *
      * @param \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface $repositoryInterface
@@ -61,12 +66,14 @@ class UpgradeData implements UpgradeDataInterface
         \Magento\CheckoutAgreements\Api\CheckoutAgreementsRepositoryInterface $repositoryInterface,
         \Magento\CheckoutAgreements\Api\Data\AgreementInterface $agreement,
         \Magenerds\GermanLaw\Setup\CmsInstaller $cmsInstaller,
-        \Magento\Framework\Setup\SampleData\Executor $executor
+        \Magento\Framework\Setup\SampleData\Executor $executor,
+        \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface
     ){
         $this->repositoryInterface = $repositoryInterface;
         $this->agreement = $agreement;
         $this->cmsInstaller = $cmsInstaller;
         $this->executor = $executor;
+        $this->configInterface = $configInterface;
     }
 
     /**
@@ -88,6 +95,11 @@ class UpgradeData implements UpgradeDataInterface
             $this->repositoryInterface->save($this->agreement, 0);
 
             $this->executor->exec($this->cmsInstaller);
+        }
+
+        if (version_compare($context->getVersion(), '1.0.4') < 0) {
+            // Enable Cookie Restriction Mode
+            $this->configInterface->saveConfig('web/cookie/cookie_restriction', 1, ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
         }
 
         $setup->endSetup();
