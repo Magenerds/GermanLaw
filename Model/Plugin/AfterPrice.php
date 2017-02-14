@@ -68,7 +68,7 @@ class AfterPrice
      */
     protected function _getAfterPriceHtml()
     {
-        if (!$this->_afterPriceHtml) {
+        if (is_null($this->_afterPriceHtml)) {
             $afterPriceBlock = $this->_layout->createBlock('Magenerds\GermanLaw\Block\AfterPrice', 'after_price');
             $afterPriceBlock->setTemplate('Magenerds_GermanLaw::price/after.phtml');
             $this->_afterPriceHtml = $afterPriceBlock->toHtml();
