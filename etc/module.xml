@@ -18,5 +18,10 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Magenerds_GermanLaw" setup_version="1.0.4" />
+    <module name="Magenerds_GermanLaw" setup_version="1.0.4">
+        <sequence>
+            <module name="Magento_Directory" />
+            <module name="Magento_Tax" />
+        </sequence>
+    </module>
 </config>
