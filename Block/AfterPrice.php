@@ -128,7 +128,7 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
         }
 
         // insert tax rate
-        $taxText = sprintf($taxText, $taxRate);
+        $taxText = str_replace('%s', $taxRate, $taxText);
 
         // insert link to shipping page
         if (strstr($taxText, '[') && strstr($taxText, ']') && $link = $this->_getCmsLink()) {
