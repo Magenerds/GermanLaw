@@ -95,7 +95,8 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
     {
         return $this->_scopeConfig->getValue(
             'germanlaw/general/enabled',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->_storeManager->getStore()->getId()
         );
     }
 
@@ -108,7 +109,11 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
     {
         /** @var $product \Magento\Catalog\Model\Product */
         $product = $this->_registry->registry('product');
-        $taxText = __($this->_scopeConfig->getValue('germanlaw/price/tax_text', \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
+        $taxText = __($this->_scopeConfig->getValue(
+            'germanlaw/price/tax_text',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->_storeManager->getStore()->getId()
+        ));
 
         $taxRate = 0;
 
@@ -147,6 +152,10 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
      */
     protected function _getCmsLink()
     {
-        return $this->_urlBuilder->getUrl(null, ['_direct' => $this->_scopeConfig->getValue('germanlaw/price/shipping_page')]);
+        return $this->_urlBuilder->getUrl(null, ['_direct' => $this->_scopeConfig->getValue(
+            'germanlaw/price/shipping_page',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->_storeManager->getStore()->getId()
+        )]);
     }
 }
