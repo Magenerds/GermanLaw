@@ -127,7 +127,7 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
         }
 
         if ($taxRate <= 0 || !$product) {
-            $taxRate = '';
+            return '';
         } else {
             $taxRate .= '%';
         }
