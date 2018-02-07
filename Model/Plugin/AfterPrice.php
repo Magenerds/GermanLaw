@@ -17,6 +17,9 @@
  */
 namespace Magenerds\GermanLaw\Model\Plugin;
 
+use Magento\Framework\Pricing\Render;
+use Magento\Framework\Pricing\SaleableInterface;
+
 /**
  * Class AfterPrice
  * @package Magenerds\GermanLaw\Model\Plugin
@@ -24,11 +27,29 @@ namespace Magenerds\GermanLaw\Model\Plugin;
 class AfterPrice
 {
     /**
+     * Hold final price code
+     *
+     * @var string
+     */
+    const FINAL_PRICE = 'final_price';
+
+    /**
+     * Hold tier price code
+     *
+     * @var string
+     */
+    const TIER_PRICE = 'tier_price';
+
+    /**
+     * Hold layout
+     *
      * @var \Magento\Framework\View\LayoutInterface
      */
     protected $_layout;
 
     /**
+     * Hold after price html string
+     *
      * @var null|string
      */
     protected $_afterPriceHtml = null;
@@ -48,17 +69,31 @@ class AfterPrice
      * Plugin for price rendering in order to display after price information
      *
      * @param \Magento\Framework\Pricing\Render $subject
-     * @param $renderHtml
+     * @oaram \Closure $closure
+     * @param array $params
      * @return string
      */
-    public function afterRender(\Magento\Framework\Pricing\Render $subject, $renderHtml)
+    public function aroundRender(Render $subject, \Closure $closure, ...$params)
     {
-        // check if html is empty
-        if ($renderHtml == '' || str_replace("\n", "", $renderHtml) == '') {
+        // run default render first
+        $renderHtml = $closure(...$params);
+
+        try{
+            // Get Price Code and Product
+            list($priceCode, $productInterceptor) = $params;
+            $emptyTierPrices = empty($productInterceptor->getTierPrice());
+
+            // If it is final price block and no tier prices exist set additional render
+            // If it is tier price block and tier prices exist set additional render
+            if ((static::FINAL_PRICE === $priceCode && $emptyTierPrices) || (static::TIER_PRICE === $priceCode && !$emptyTierPrices)) {
+                $renderHtml .= $this->_getAfterPriceHtml();
+            }
+        } catch (\Exception $ex) {
+            // if an error occurs, just render the default since it is preallocated
             return $renderHtml;
         }
 
-        return $renderHtml . $this->_getAfterPriceHtml();
+        return $renderHtml;
     }
 
     /**
@@ -68,7 +103,7 @@ class AfterPrice
      */
     protected function _getAfterPriceHtml()
     {
-        if (is_null($this->_afterPriceHtml)) {
+        if (null === $this->_afterPriceHtml) {
             $afterPriceBlock = $this->_layout->createBlock('Magenerds\GermanLaw\Block\AfterPrice', 'after_price');
             $afterPriceBlock->setTemplate('Magenerds_GermanLaw::price/after.phtml');
             $this->_afterPriceHtml = $afterPriceBlock->toHtml();
