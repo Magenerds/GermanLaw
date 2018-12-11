@@ -2,7 +2,7 @@
   "name": "magenerds/germanlaw",
   "description": "This module provides general settings for german stores",
   "require": {
-    "magento/framework": "^100.0.0|^101.0.0",
+    "magento/framework": "*",
     "magenerds/dashboard": "^1.0"
   },
   "repositories": {
