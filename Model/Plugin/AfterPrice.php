@@ -78,7 +78,7 @@ class AfterPrice
         // run default render first
         $renderHtml = $closure(...$params);
 
-        try{
+        /*try{
             // Get Price Code and Product
             list($priceCode, $productInterceptor) = $params;
             $emptyTierPrices = empty($productInterceptor->getTierPrice());
@@ -91,7 +91,7 @@ class AfterPrice
         } catch (\Exception $ex) {
             // if an error occurs, just render the default since it is preallocated
             return $renderHtml;
-        }
+        }*/
 
         return $renderHtml;
     }
