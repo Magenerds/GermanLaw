@@ -67,13 +67,14 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
         \Magento\Customer\Model\Session $session,
         array $data = []
     ){
+        parent::__construct($context, $data);
+
         $this->_scopeConfig = $context->getScopeConfig();
         $this->_registry = $registry;
         $this->_taxCalculation = $taxCalculation;
         $this->_session = $session;
         $this->_storeManager = $context->getStoreManager();
         $this->_urlBuilder = $context->getUrlBuilder();
-        parent::__construct($context, $data);
     }
 
     /**
