@@ -20,7 +20,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="product.info.price">
-            <block after="product.price.final" class="Magenerds\GermanLaw\Block\AfterPrice" name="price_after" as="price.final.after"
+            <block after="product.price.final" class="Magenerds\GermanLaw\Block\AfterPrice" name="price.final.after" as="price.final.after"
                    template="Magenerds_GermanLaw::price/after.phtml"/>
         </referenceContainer>
     </body>
