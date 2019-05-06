@@ -11,8 +11,8 @@
  * @category   Magenerds
  * @package    Magenerds_GermanLaw
  * @subpackage Test
- * @copyright  Copyright (c) 2016 TechDivision GmbH (http://www.techdivision.com)
- * @link       http://www.techdivision.com/
+ * @copyright  Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
+ * @link       https://www.techdivision.com/
  * @author     Bernhard Wick <b.wick@techdivision.com>
  */
 namespace Magenerds\GermanLaw\Block;
