@@ -5,12 +5,6 @@
     "magento/framework": "^100.0.0|^101.0.0|^102.0.0",
     "magenerds/dashboard": "^1.0"
   },
-  "repositories": {
-    "magento": {
-      "type": "composer",
-      "url": "https://repo.magento.com/"
-    }
-  },
   "type": "magento2-module",
   "license": "OSL-3.0",
   "autoload": {
