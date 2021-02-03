@@ -2,14 +2,8 @@
   "name": "magenerds/germanlaw",
   "description": "This module provides general settings for german stores",
   "require": {
-    "magento/framework": "^100.0.0|^101.0.0|^102.0.0",
+    "magento/framework": "^100.0.0|^101.0.0|^102.0.0|^103.0.0",
     "magenerds/dashboard": "^1.0"
-  },
-  "repositories": {
-    "magento": {
-      "type": "composer",
-      "url": "https://repo.magento.com/"
-    }
   },
   "type": "magento2-module",
   "license": "OSL-3.0",
