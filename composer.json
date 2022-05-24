@@ -1,18 +1,18 @@
 {
-  "name": "magenerds/germanlaw",
-  "description": "This module provides general settings for german stores",
-  "require": {
-    "magento/framework": "^100.0.0|^101.0.0|^102.0.0|^103.0.0",
-    "magenerds/dashboard": "^1.0"
-  },
-  "type": "magento2-module",
-  "license": "OSL-3.0",
-  "autoload": {
-    "files": [
-      "registration.php"
-    ],
-    "psr-4": {
-      "Magenerds\\GermanLaw\\": ""
+    "name": "magenerds/germanlaw",
+    "description": "This module provides general settings for german stores",
+    "require": {
+        "magento/framework": "*",
+        "magenerds/dashboard": "*"
+    },
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Magenerds\\GermanLaw\\": ""
+        }
     }
-  }
 }
