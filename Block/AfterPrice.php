@@ -153,10 +153,12 @@ class AfterPrice extends \Magento\Framework\View\Element\Template
      */
     protected function _getCmsLink()
     {
-        return $this->_urlBuilder->getUrl(null, ['_direct' => $this->_scopeConfig->getValue(
+        $directLink = $this->_scopeConfig->getValue(
             'germanlaw/price/shipping_page',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $this->_storeManager->getStore()->getId()
-        )]);
+        );
+        $directLink = explode('|', $directLink);
+        return $this->_urlBuilder->getUrl(null, ['_direct' => reset($directLink)]);
     }
 }
