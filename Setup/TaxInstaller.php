@@ -15,94 +15,110 @@
  * @link       https://www.techdivision.com/
  * @author     Florian Sydekum <f.sydekum@techdivision.com>
  */
+
 namespace Magenerds\GermanLaw\Setup;
 
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\File\Csv;
 use Magento\Framework\Setup;
+use Magento\Framework\Setup\SampleData\Context;
+use Magento\Framework\Setup\SampleData\FixtureManager;
+use Magento\Tax\Api\Data\TaxClassInterface;
+use Magento\Tax\Api\Data\TaxRateInterfaceFactory;
+use Magento\Tax\Api\Data\TaxRuleInterfaceFactory;
+use Magento\Tax\Api\TaxClassRepositoryInterface;
+use Magento\Tax\Api\TaxRateRepositoryInterface;
+use Magento\Tax\Api\TaxRuleRepositoryInterface;
+use Magento\Tax\Model\Calculation\RateFactory;
+use Magento\Tax\Model\ClassModel;
+use Magento\Tax\Model\ClassModelFactory;
 
 /**
  * Class TaxInstaller
+ *
  * @package Magenerds\GermanLaw\Setup
  */
 class TaxInstaller implements Setup\SampleData\InstallerInterface
 {
     /**
-     * @var \Magento\Tax\Api\TaxRuleRepositoryInterface
+     * @var TaxRuleRepositoryInterface
      */
     protected $_taxRuleRepository;
 
     /**
-     * @var \Magento\Tax\Api\Data\TaxRuleInterfaceFactory
+     * @var TaxRuleInterfaceFactory
      */
     protected $_ruleFactory;
 
     /**
-     * @var \Magento\Tax\Api\TaxRateRepositoryInterface
+     * @var TaxRateRepositoryInterface
      */
     protected $_taxRateRepository;
 
     /**
-     * @var \Magento\Tax\Api\Data\TaxRateInterfaceFactory
+     * @var TaxRateInterfaceFactory
      */
     protected $_rateFactory;
 
     /**
-     * @var \Magento\Tax\Model\Calculation\RateFactory
+     * @var RateFactory
      */
     protected $_taxRateFactory;
 
     /**
-     * @var \Magento\Framework\Api\SearchCriteriaBuilder
+     * @var SearchCriteriaBuilder
      */
     protected $_criteriaBuilder;
 
     /**
-     * @var \Magento\Framework\Api\FilterBuilder
+     * @var FilterBuilder
      */
     protected $_filterBuilder;
 
     /**
-     * @var \Magento\Framework\Setup\SampleData\FixtureManager
+     * @var FixtureManager
      */
     protected $_fixtureManager;
 
     /**
-     * @var \Magento\Framework\File\Csv
+     * @var Csv
      */
     protected $_csvReader;
 
     /**
-     * @var \Magento\Tax\Model\ClassModelFactory
+     * @var ClassModelFactory
      */
-    protected $_taxClass;
+    protected $_taxClassFactory;
 
     /**
-     * @var \Magento\Tax\Api\TaxClassRepositoryInterface
+     * @var TaxClassRepositoryInterface
      */
     protected $_taxClassRepository;
 
     /**
-     * @param \Magento\Framework\Setup\SampleData\Context $sampleDataContext
-     * @param \Magento\Tax\Api\TaxRuleRepositoryInterface $taxRuleRepository
-     * @param \Magento\Tax\Api\Data\TaxRuleInterfaceFactory $ruleFactory
-     * @param \Magento\Tax\Api\TaxRateRepositoryInterface $taxRateRepository
-     * @param \Magento\Tax\Api\Data\TaxRateInterfaceFactory $rateFactory
-     * @param \Magento\Tax\Model\Calculation\RateFactory $taxRateFactory
-     * @param \Magento\Framework\Api\SearchCriteriaBuilder $criteriaBuilder
-     * @param \Magento\Framework\Api\FilterBuilder $filterBuilder
-     * @param \Magento\Tax\Api\Data\TaxClassInterface $taxClass
-     * @param \Magento\Tax\Api\TaxClassRepositoryInterface $taxClassRepository
+     * @param Context $sampleDataContext
+     * @param TaxRuleRepositoryInterface $taxRuleRepository
+     * @param TaxRuleInterfaceFactory $ruleFactory
+     * @param TaxRateRepositoryInterface $taxRateRepository
+     * @param TaxRateInterfaceFactory $rateFactory
+     * @param RateFactory $taxRateFactory
+     * @param SearchCriteriaBuilder $criteriaBuilder
+     * @param FilterBuilder $filterBuilder
+     * @param TaxClassInterface $taxClass
+     * @param TaxClassRepositoryInterface $taxClassRepository
      */
     public function __construct(
-        \Magento\Framework\Setup\SampleData\Context $sampleDataContext,
-        \Magento\Tax\Api\TaxRuleRepositoryInterface $taxRuleRepository,
-        \Magento\Tax\Api\Data\TaxRuleInterfaceFactory $ruleFactory,
-        \Magento\Tax\Api\TaxRateRepositoryInterface $taxRateRepository,
-        \Magento\Tax\Api\Data\TaxRateInterfaceFactory $rateFactory,
-        \Magento\Tax\Model\Calculation\RateFactory $taxRateFactory,
-        \Magento\Framework\Api\SearchCriteriaBuilder $criteriaBuilder,
-        \Magento\Framework\Api\FilterBuilder $filterBuilder,
-        \Magento\Tax\Model\ClassModelFactory $taxClassFactory,
-        \Magento\Tax\Api\TaxClassRepositoryInterface $taxClassRepository
+        Context $sampleDataContext,
+        TaxRuleRepositoryInterface $taxRuleRepository,
+        TaxRuleInterfaceFactory $ruleFactory,
+        TaxRateRepositoryInterface $taxRateRepository,
+        TaxRateInterfaceFactory $rateFactory,
+        RateFactory $taxRateFactory,
+        SearchCriteriaBuilder $criteriaBuilder,
+        FilterBuilder $filterBuilder,
+        ClassModelFactory $taxClassFactory,
+        TaxClassRepositoryInterface $taxClassRepository
     ) {
         $this->_fixtureManager = $sampleDataContext->getFixtureManager();
         $this->_csvReader = $sampleDataContext->getCsvReader();
@@ -189,7 +205,7 @@ class TaxInstaller implements Setup\SampleData\InstallerInterface
                 } else {
                     $taxClass = $this->_taxClassFactory->create();
                     $taxClass->setClassName($data['tax_product_class'])
-                        ->setClassType(\Magento\Tax\Model\ClassModel::TAX_CLASS_TYPE_PRODUCT);
+                        ->setClassType(ClassModel::TAX_CLASS_TYPE_PRODUCT);
                     $this->_taxClassRepository->save($taxClass);
                     $productClassId = $taxClass->getClassId();
                 }
